@@ -1,8 +1,8 @@
 //import { ToggleButton } from '@mui/material';
 import React, {useState, useEffect} from 'react'
-import InventoryList from '../component/InventoryList';
 
-let productData = localStorage.getItem('inventory' ) ? JSON.parse(localStorage.getItem('inventory')) : [];
+
+
 const Example = () => {
     //count initialized to zero, setCount will update the count argument, call setCount function in line 11 will add 1 to count variable
     const [count, setCount] = useState(0);
@@ -12,8 +12,8 @@ const Example = () => {
     //for product information useState hook
     const [productName, setProductName] =useState('');
     const [productAmount, setProductAmount] =useState(0);
-    const [productTotalAmount, setProductTotalAmount] =useState(productData);
-   
+    const [productTotalAmount, setProductTotalAmount] =useState([]);
+    const [id, setID] = useState(Date.now);
 
     const handleproductName = (e) => {
         setProductName(e.target.value); 
@@ -21,23 +21,19 @@ const Example = () => {
     const handleproductAmount = (e) => {
         setProductAmount(e.target.value);
     };
-    const handleProductDelete = () => {
-        setProductTotalAmount([]);
-    };
     const handleProductSubmit = (e) => {
         e.preventDefault();
-        
+        setID(Date.now);
         if (productName!=='' && productAmount>0 ) {
-            const product = {productName, productAmount};
-            alert (JSON.stringify(product))
+            const product = {id, productName, productAmount};
             setProductTotalAmount([...productTotalAmount, product]); //product will be inside the spread array totalAmount
         }
         else {
             alert('Invalid product name or amount');
         }
+        
         setProductName('');
         setProductAmount(0);
-        
     } 
     
     //ToggleButton =() => {
@@ -51,18 +47,8 @@ const Example = () => {
         setTimer(0);
     }
     useEffect(()=>{
-        localStorage.setItem('inventory', JSON.stringify(productTotalAmount));},[productTotalAmount]);
-        
-        // const getInfo =()=> {
-        // let invetoryArray = [];
-        // invetoryArray = JSON.parse(localStorage.getItem('inventory'));
-        // document.getElementById('showHere').innerText=invetoryArray;
-        // //console.table(invetoryArray);
-        // }
-
-        const delInfo=()=> {
-            localStorage.removeItem('inventory');
-        }
+        localStorage.setItem('inventory', JSON.stringify(productTotalAmount));
+      
         // let interval = 0;
         // if (isActive ) {
         //     interval = setInterval(()=>setTimer(timer=>timer+1),1000); //setinterval
@@ -71,7 +57,7 @@ const Example = () => {
         //     clearInterval(interval); //will reset to zero
         // }
         // return ()=>clearInterval(interval);
-
+    },[productTotalAmount]);
      //[isActive, timer]);
      return (
         <div align='center' sx={{padding:'20px'}}>
@@ -84,14 +70,7 @@ const Example = () => {
                     <button type='submit'>Submit</button>
                     
                 </form>
-                <InventoryList productTotalAmount={productTotalAmount}/>
-                <h4>Total {productTotalAmount.reduce((accumulator, currrentvalue)=>{
-                    return (accumulator+=parseFloat(currrentvalue.productAmount));
-                },0)}</h4>
-                {/* <button onClick={getInfo}>Retrieve</button> */}
-                <button onClick={handleProductDelete}>Delete</button>
-                {/* <button onClick={delInfo}>Delete</button> */}
-                {/* <p id='showHere'></p> */}
+                <p></p>
 
             <h2>{userName} </h2>
             <input type="text" value={userName} onChange={(event)=>setUsername(event.target.value)}></input>
