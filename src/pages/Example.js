@@ -24,7 +24,7 @@ const Example = () => {
         if (isActive ) {
             interval = setInterval(()=>setTimer(timer=>timer+1),1000); //setinterval
         }
-        else if (!isActive && timer!=0) {
+        else if (!isActive && timer!==0) {
             clearInterval(interval); //will reset to zero
         }
         return ()=>clearInterval(interval);

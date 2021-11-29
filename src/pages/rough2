@@ -1,0 +1,67 @@
+import { Typography } from '@material-ui/core';
+import React, { useRef } from 'react';
+
+export default function Contact() {
+   const fNameRef = useRef(null);
+   const lNameRef = useRef(null);
+   const emailRef = useRef(null);
+   const messageRef = useRef(null);
+   //const [id, setID] = useState(Date.now)
+
+   const handleSubmit = (e) => {
+      e.preventDefault();
+      const formData = {
+         //id: id,
+
+         fName: fNameRef.current.value,
+         lName: lNameRef.current.value,
+         email: emailRef.current.value,
+         message: messageRef.current.value,
+      };
+      alert(JSON.stringify(formData))
+   };
+
+   return (
+      <Typography>
+         <form id="form" onSubmit={handleSubmit}>
+            <label for="fName">First Name</label>
+            <input
+               ref={fNameRef}
+               id="fName"
+               type="text"
+               name="fName"
+               required
+            />
+            <br />
+            <label for="lName">Last Name</label>
+            <input
+               ref={lNameRef}
+               id="lName"
+               type="text"
+               name="lName"
+               required
+            />
+            <br />
+            <label for="email">Email Address</label>
+            <input
+               ref={emailRef}
+               id="email"
+               type="email"
+               name="email"
+               required
+            />
+            <br />
+            <label for="message">Message</label>
+            <textarea
+               ref={messageRef}
+               cols="20"
+               rows="10"
+               name="message"
+            ></textarea>
+            <br />
+            <br />
+            <button type="submit">Submit</button>
+         </form>
+      </Typography>
+   );
+}

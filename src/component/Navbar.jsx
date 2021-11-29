@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: 'white',
         fontSize: '20px',
-        marginLeft: theme.spacing(18),
+        marginLeft: theme.spacing(10),
         '&:hover' : {
             color: 'yellow',
             borderBottom: '1px solid white'
@@ -45,11 +45,12 @@ const Navbar = () => {
                 {isMobile ? <DrawerComponent/> : 
                 <div className={classes.navlink}>
                     <Link to="/" className={classes.link}>HOME</Link>
-                    <Link to="/sample" className={classes.link}>Examples</Link>
+                    
                     <Link to="/about" className={classes.link}>ABOUT</Link>
                     <Link to="/contact" className={classes.link}>CONTACT US</Link>
                     <Link to="/faq" className={classes.link}>FAQ</Link>
                     <Link to="/porfolio" className={classes.link}>Porfolio</Link>
+                    <Link to="/sample" className={classes.link}>Examples</Link>
                 </div>
                 }
             </Toolbar>
